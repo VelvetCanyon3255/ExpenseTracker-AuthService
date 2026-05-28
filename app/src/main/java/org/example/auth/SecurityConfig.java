@@ -3,6 +3,8 @@ package org.example.auth;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.example.eventProducer.UserInfoProducer;
 import org.example.repository.UserRepository;
 import org.example.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +27,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableMethodSecurity
-@Data
+@RequiredArgsConstructor
 
 public class SecurityConfig {
 
-    @Autowired
+
     private final PasswordEncoder passwordEncoder;
-    @Autowired
+
     private final UserDetailsServiceImpl userDetailsServiceImpl;
+    
+    private final UserInfoProducer userInfoProducer;
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        return new UserDetailsServiceImpl(userRepository, passwordEncoder);
+    public UserDetailsService userDetailsService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserInfoProducer userInfoProducer) {
+        return new UserDetailsServiceImpl(userRepository, passwordEncoder, userInfoProducer);
     }
 
     @Bean

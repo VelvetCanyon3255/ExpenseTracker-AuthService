@@ -1,27 +1,21 @@
 package org.example.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.example.entities.UserInfo;
+import lombok.Builder;
+import lombok.Data;
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-@AllArgsConstructor
-@NoArgsConstructor
-@SuperBuilder
-@JsonIgnoreProperties(ignoreUnknown = true)
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserInfoDto extends UserInfo {
+@Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserInfoEvent {
 
-    @NonNull
+    private String userId;
     private String firstName;
-    @NonNull
     private String lastName;
-    @NonNull
     private String email;
-    @NonNull
     private Long phoneNumber;
 }

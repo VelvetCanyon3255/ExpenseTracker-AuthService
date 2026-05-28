@@ -78,6 +78,7 @@ public class AuthController
 
 
         }catch (Exception ex){
+            ex.printStackTrace();
             return new ResponseEntity<>("Exception in User Service", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
